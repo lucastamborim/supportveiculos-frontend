@@ -13,8 +13,7 @@ export default function MyAds() {
   useEffect(() => {
     const loadMyAds = async () => {
       try {
-        const data = await adService.listAds();
-        const myAds = data.filter((ad) => ad.owner === user.username);
+        const myAds = await adService.getMyAds(user.username);
         setAds(myAds);
       } catch (err) {
         console.error("Erro ao carregar MEUS anúncios:", err);
