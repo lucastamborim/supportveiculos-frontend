@@ -1,5 +1,3 @@
-// src/utils/media.js
-
 export const getMediaUrl = (path) => {
     // Retorna null se não houver caminho
     if (!path) return null;

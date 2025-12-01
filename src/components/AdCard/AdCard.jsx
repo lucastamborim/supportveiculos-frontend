@@ -1,4 +1,3 @@
-// src/components/AdCard/AdCard.jsx
 import { Link } from "react-router-dom";
 import { getMediaUrl } from "@utils/media"; // usa alias @utils
 import "./AdCard.css";
