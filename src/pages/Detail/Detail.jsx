@@ -15,6 +15,7 @@ export default function Detail() {
   const [ad, setAd] = useState(null);
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(null);
 
   useEffect(() => {
     const load = async () => {
@@ -38,6 +39,21 @@ export default function Detail() {
     load();
   }, [id]);
 
+  const handleDeletePhoto = async (photoId) => {
+    if (!window.confirm("Deseja realmente excluir esta foto?")) return;
+    
+    try {
+      setDeleting(photoId);
+      await photoService.deletePhoto(id, photoId);
+      setPhotos(photos.filter((p) => p.id !== photoId));
+    } catch (err) {
+      console.error("Erro ao deletar foto:", err);
+      alert("Erro ao deletar foto.");
+    } finally {
+      setDeleting(null);
+    }
+  };
+
   if (loading) return <Loading />;
   if (!ad) return <p>Anúncio não encontrado.</p>;
 
@@ -47,16 +63,27 @@ export default function Detail() {
     <div className="detail-container">
       <h1 className="detail-title">{ad.titulo}</h1>
 
-      {/* Carrossel simples */}
+      {/* Galeria de fotos */}
       {photos.length > 0 ? (
-        <div className="carousel">
+        <div className="photo-gallery">
           {photos.map((photo) => (
-            <img
-              key={photo.id}
-              src={getMediaUrl(photo.imagem)}
-              alt="Foto do anúncio"
-              className="carousel-img"
-            />
+            <div key={photo.id} className="photo-wrapper">
+              <img
+                src={getMediaUrl(photo.imagem)}
+                alt="Foto do anúncio"
+                className="gallery-img"
+              />
+              {isOwner && (
+                <button
+                  className="btn-delete-photo"
+                  onClick={() => handleDeletePhoto(photo.id)}
+                  disabled={deleting === photo.id}
+                  title="Deletar foto"
+                >
+                  🗑️
+                </button>
+              )}
+            </div>
           ))}
         </div>
       ) : (
