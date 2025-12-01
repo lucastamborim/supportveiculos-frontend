@@ -18,7 +18,7 @@ export const addPhoto = async (adId, file, ordem = 1) => {
 };
 
 export const deletePhoto = async (adId, photoId) => {
-  const res = await api.delete(`/anuncios/${adId}/deletar_foto/${photoId}/`);
+  const res = await api.delete(`/anuncios/${adId}/deletar-foto/${photoId}/`);
   return res.data;
 };
 
