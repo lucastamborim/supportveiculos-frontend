@@ -320,7 +320,6 @@ npm run build
 ## 📖 Documentação
 
 - Backend: https://github.com/lucastamborim/supportveiculos-backend
-- API Docs: Disponível via Swagger no backend
 
 ## 🤝 Dependências Principais
 
