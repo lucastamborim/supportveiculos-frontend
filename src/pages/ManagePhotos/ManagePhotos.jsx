@@ -1,8 +1,9 @@
-// src/pages/ManagePhotos.jsx
+// src/pages/ManagePhotos/ManagePhotos.jsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../services/api";
-import Loading from "../components/Loading";
+import photoService from "../../services/photoService";
+import { getMediaUrl } from "../../utils/media";
+import Loading from "../../components/Loading/Loading";
 
 export default function ManagePhotos() {
   const { id } = useParams(); // ID do anúncio
@@ -17,8 +18,8 @@ export default function ManagePhotos() {
   useEffect(() => {
     const loadPhotos = async () => {
       try {
-        const res = await api.get(`/api/anuncios/${id}/listar_fotos/`);
-        setPhotos(res.data);
+        const data = await photoService.listPhotos(id);
+        setPhotos(data);
       } catch (err) {
         console.error(err);
       } finally {
@@ -36,16 +37,14 @@ export default function ManagePhotos() {
     formData.append("imagem", file);
     formData.append("ordem", order);
 
-    try {
-      setUploading(true);
-      await api.post(`/api/anuncios/${id}/adicionar_foto/`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      setFile(null);
-      setOrder(1);
-      // Recarregar fotos
-      const res = await api.get(`/api/anuncios/${id}/listar_fotos/`);
-      setPhotos(res.data);
+      try {
+        setUploading(true);
+        await photoService.addPhoto(id, file, order);
+        setFile(null);
+        setOrder(1);
+        // Recarregar fotos
+        const data = await photoService.listPhotos(id);
+        setPhotos(data);
     } catch (err) {
       console.error(err);
       alert("Erro ao enviar foto.");
@@ -57,7 +56,7 @@ export default function ManagePhotos() {
   const handleDelete = async (photoId) => {
     if (!window.confirm("Deseja realmente excluir esta foto?")) return;
     try {
-      await api.delete(`/api/anuncios/${id}/deletar-foto/${photoId}/`);
+      await photoService.deletePhoto(id, photoId);
       setPhotos(photos.filter((p) => p.id !== photoId));
     } catch (err) {
       console.error(err);
@@ -95,7 +94,7 @@ export default function ManagePhotos() {
         {photos.map((photo) => (
           <div key={photo.id} className="relative">
             <img
-              src={photo.imagem}
+              src={getMediaUrl(photo.imagem)}
               alt={`Foto ${photo.id}`}
               className="w-full h-32 object-cover rounded"
             />

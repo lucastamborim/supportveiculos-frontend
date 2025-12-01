@@ -7,11 +7,23 @@ export const getRefreshToken = () => localStorage.getItem("refreshToken");
 export const removeRefreshToken = () => localStorage.removeItem("refreshToken");
 
 export const setUser = (user) => localStorage.setItem("user", JSON.stringify(user));
-export const getUser = () => JSON.parse(localStorage.getItem("user"));
+export const getUser = () => {
+  try {
+    const raw = localStorage.getItem("user");
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    console.error("Erro ao parsear usuário do storage:", e);
+    return null;
+  }
+};
 export const removeUser = () => localStorage.removeItem("user");
 
 export const clearStorage = () => {
-  removeAccessToken();
-  removeRefreshToken();
-  removeUser();
+  try {
+    removeAccessToken();
+    removeRefreshToken();
+    removeUser();
+  } catch (e) {
+    console.error("Erro ao limpar storage:", e);
+  }
 };

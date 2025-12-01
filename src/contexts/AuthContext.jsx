@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
-import { getAccessToken, getUser, removeAccessToken, removeRefreshToken, removeUser } from "../utils/storage";
+import { getAccessToken, getUser, removeAccessToken, removeRefreshToken, removeUser, clearStorage } from "../utils/storage";
 import { refreshAuthToken } from "../services/authService";
+import api from "../services/api";
 
 export const AuthContext = createContext();
 
@@ -29,21 +30,38 @@ export const AuthProvider = ({ children }) => {
       }
     };
     init();
+
+    // Adiciona interceptor de resposta para limpar auth ao falhar refresh
+    const responseInterceptor = api.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401 && error.config._retry) {
+          // Se tentou refresh e falhou, limpa storage
+          clearStorage();
+          setIsAuthenticated(false);
+          setUserState(null);
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      api.interceptors.response.eject(responseInterceptor);
+    };
   }, []);
 
   const checkAuth = async () => {
     const refreshed = await refreshAuthToken();
     if (refreshed) setIsAuthenticated(true);
     else {
+      clearStorage();
       setIsAuthenticated(false);
       setUserState(null);
     }
   };
 
   const signOut = async () => {
-    removeAccessToken();
-    removeRefreshToken();
-    removeUser();
+    clearStorage();
     setIsAuthenticated(false);
     setUserState(null);
   };

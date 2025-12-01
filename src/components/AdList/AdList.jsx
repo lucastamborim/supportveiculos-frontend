@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import AdCard from "./AdCard";
-import Loading from "./Loading";
+import AdCard from "../AdCard/AdCard";
+import Loading from "../Loading/Loading";
 import './AdList.css';
 
 export default function AdList({ fetchAds }) {

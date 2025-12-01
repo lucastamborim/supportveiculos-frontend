@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../services/api";
-import Loading from "../components/Loading";
-import { useAuth } from "../contexts/AuthContext";
+import adService from "../../services/adService";
+import photoService from "../../services/photoService";
+import Loading from "../../components/Loading/Loading";
+import { useAuth } from "../../contexts/AuthContext";
+import { getMediaUrl } from "../../utils/media"; 
 import "./Detail.css";
 
 export default function Detail() {
@@ -17,30 +19,24 @@ export default function Detail() {
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      await fetchAd();
-      await fetchPhotos();
+      try {
+        const adData = await adService.getAd(id);
+        setAd(adData);
+      } catch (err) {
+        console.error("Erro ao carregar anúncio:", err);
+      }
+
+      try {
+        const photosRes = await photoService.listPhotos(id);
+        setPhotos(photosRes);
+      } catch (err) {
+        console.error("Erro ao carregar fotos:", err);
+      }
+
       setLoading(false);
     };
     load();
   }, [id]);
-
-  const fetchAd = async () => {
-    try {
-      const res = await api.get(`/anuncios/${id}/`);
-      setAd(res.data);
-    } catch (err) {
-      console.error("Erro ao carregar anúncio:", err);
-    }
-  };
-
-  const fetchPhotos = async () => {
-    try {
-      const res = await api.get(`/anuncios/${id}/listar_fotos/`);
-      setPhotos(res.data);
-    } catch (err) {
-      console.error("Erro ao carregar fotos:", err);
-    }
-  };
 
   if (loading) return <Loading />;
   if (!ad) return <p>Anúncio não encontrado.</p>;
@@ -57,7 +53,7 @@ export default function Detail() {
           {photos.map((photo) => (
             <img
               key={photo.id}
-              src={photo.imagem}
+              src={getMediaUrl(photo.imagem)}
               alt="Foto do anúncio"
               className="carousel-img"
             />

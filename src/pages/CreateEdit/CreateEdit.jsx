@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../services/api";
-import Loading from "../components/Loading";
+import adService from "../../services/adService";
+import Loading from "../../components/Loading/Loading";
 import './CreateEdit.css';
 
 export default function CreateEdit() {
@@ -25,8 +25,8 @@ export default function CreateEdit() {
     if (isEdit) {
       const loadAd = async () => {
         try {
-          const res = await api.get(`/anuncios/${id}/`);
-          setForm(res.data);
+          const data = await adService.getAd(id);
+          setForm(data);
         } catch (err) {
           console.error(err);
           setError("Erro ao carregar anúncio.");
@@ -45,19 +45,19 @@ export default function CreateEdit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    try {
-      if (isEdit) {
-        await api.patch(`/anuncios/${id}/`, form);
-      } else {
-        const res = await api.post("/anuncios/", form);
-        navigate(`/detail/${res.data.id}`);
-        return;
+      try {
+        if (isEdit) {
+          await adService.updateAd(id, form);
+        } else {
+          const res = await adService.createAd(form);
+          navigate(`/detail/${res.id}`);
+          return;
+        }
+        navigate(`/detail/${id}`);
+      } catch (err) {
+        console.error(err);
+        setError("Erro ao salvar anúncio. Verifique os dados.");
       }
-      navigate(`/detail/${id}`);
-    } catch (err) {
-      console.error(err);
-      setError("Erro ao salvar anúncio. Verifique os dados.");
-    }
   };
 
   if (loading) return <Loading />;

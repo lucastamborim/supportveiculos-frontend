@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
-import api from "../services/api";
-import AdCard from "../components/AdCard";
-import Loading from "../components/Loading";
+import { useAuth } from "../../contexts/AuthContext";
+import adService from "../../services/adService";
+import AdCard from "../../components/AdCard/AdCard";
+import Loading from "../../components/Loading/Loading";
 import './MyAds.css';
 
 export default function MyAds() {
@@ -13,8 +13,8 @@ export default function MyAds() {
   useEffect(() => {
     const loadMyAds = async () => {
       try {
-        const res = await api.get("/anuncios/");
-        const myAds = res.data.filter((ad) => ad.owner === user.username);
+        const data = await adService.listAds();
+        const myAds = data.filter((ad) => ad.owner === user.username);
         setAds(myAds);
       } catch (err) {
         console.error("Erro ao carregar MEUS anúncios:", err);

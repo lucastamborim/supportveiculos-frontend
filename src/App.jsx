@@ -2,16 +2,16 @@ import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 
-import Home from './pages/Home'
-import Detail from './pages/Detail'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import CreateEdit from './pages/CreateEdit'
-import ManagePhotos from './pages/ManagePhotos'
-import MyAds from './pages/MyAds'
+import Home from './pages/Home/Home'
+import Detail from './pages/Detail/Detail'
+import Login from './pages/Login/Login'
+import Register from './pages/Register/Register'
+import CreateEdit from './pages/CreateEdit/CreateEdit'
+import ManagePhotos from './pages/ManagePhotos/ManagePhotos'
+import MyAds from './pages/MyAds/MyAds'
 
 
-import Header from './components/Header'
+import Header from './components/Header/Header'
 import PrivateRoute from './routes/PrivateRoute'
 
 
