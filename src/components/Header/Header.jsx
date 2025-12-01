@@ -4,7 +4,7 @@ import { AuthContext } from '../../contexts/AuthContext'
 import './Header.css'
 
 export default function Header(){
-  const { isAuthenticated, user, signOut } = useContext(AuthContext)
+  const { isAuthenticated, signOut } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const handleLogout = () => {

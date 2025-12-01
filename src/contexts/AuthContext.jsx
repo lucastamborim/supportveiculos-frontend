@@ -1,5 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useEffect, useState, useContext } from "react";
-import { getAccessToken, getUser, removeAccessToken, removeRefreshToken, removeUser, clearStorage } from "../utils/storage";
+import { getAccessToken, getUser, clearStorage } from "../utils/storage";
 import { refreshAuthToken } from "../services/authService";
 import api from "../services/api";
 

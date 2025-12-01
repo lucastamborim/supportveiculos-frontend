@@ -19,7 +19,7 @@ export default function Login() {
       await login(username, password);
       await checkAuth();
       navigate("/");
-    } catch (err) {
+    } catch {
       setError("Usuário ou senha incorretos.");
     }
   };

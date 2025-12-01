@@ -1,5 +1,3 @@
-// src/pages/Home/Home.jsx
-
 import { useEffect, useState } from "react";
 import adService from "../../services/adService";
 import AdCard from "../../components/AdCard/AdCard";
@@ -29,7 +27,6 @@ export default function Home() {
     return (
         <div className="home-container">
             {ads.length > 0 ? (
-                // Aqui, o componente AdCard recebe os dados (ad)
                 ads.map((ad) => <AdCard key={ad.id} ad={ad} />)
             ) : (
                 <p className="no-ads-message">

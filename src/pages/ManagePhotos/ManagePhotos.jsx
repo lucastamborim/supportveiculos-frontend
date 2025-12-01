@@ -37,14 +37,14 @@ export default function ManagePhotos() {
     formData.append("imagem", file);
     formData.append("ordem", order);
 
-      try {
-        setUploading(true);
-        await photoService.addPhoto(id, file, order);
-        setFile(null);
-        setOrder(1);
-        // Recarregar fotos
-        const data = await photoService.listPhotos(id);
-        setPhotos(data);
+    try {
+      setUploading(true);
+      await photoService.addPhoto(id, file, order);
+      setFile(null);
+      setOrder(1);
+      // Recarregar fotos
+      const data = await photoService.listPhotos(id);
+      setPhotos(data);
     } catch (err) {
       console.error(err);
       alert("Erro ao enviar foto.");
