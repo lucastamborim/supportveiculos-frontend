@@ -1,0 +1,27 @@
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* tela cheia */
+}
+
+.spinner {
+  border: 4px solid #3b82f6; /* blue-500 */
+  border-top-color: transparent;
+  border-radius: 50%;
+  width: 3rem; /* 12 * 0.25rem = 3rem */
+  height: 3rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  margin-left: 1rem; /* ml-4 */
+  color: #2563eb; /* blue-600 */
+  font-weight: 500; /* font-medium */
+}

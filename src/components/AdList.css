@@ -1,0 +1,25 @@
+.adlist-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem; /* gap-4 */
+}
+
+/* Para telas médias (min-width: 768px) */
+@media (min-width: 768px) {
+  .adlist-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Para telas grandes (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .adlist-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.no-ads-message {
+  color: #9ca3af; /* gray-400 */
+  text-align: center;
+  margin-top: 1rem; /* mt-4 */
+}

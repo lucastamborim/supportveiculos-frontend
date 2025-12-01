@@ -1,0 +1,25 @@
+.myads-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem; /* gap-6 */
+  padding: 1.5rem; /* p-6 */
+}
+
+@media (min-width: 640px) { /* sm */
+  .myads-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) { /* lg */
+  .myads-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.no-ads-message {
+  color: #6b7280; /* gray-500 */
+  text-align: center;
+  grid-column: 1 / -1; /* col-span-full */
+  margin-top: 1.5rem; /* mt-6 */
+}

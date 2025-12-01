@@ -1,0 +1,70 @@
+/* Header geral */
+.header {
+  background-color: #1f2937; /* cinza escuro */
+  color: white;
+  padding: 0.75rem 1.5rem; /* 3/4rem top/bottom, 6/4 rem left/right */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Container interno para centralizar conteúdo */
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+}
+
+/* Navegação */
+nav {
+  display: flex;
+  gap: 1rem; /* espaçamento entre links */
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #3b82f6; /* azul */
+}
+
+/* Botão de logout */
+.link-btn {
+  background: none;
+  border: none;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.link-btn:hover {
+  color: #3b82f6; /* azul */
+}
+
+/* Responsivo (exemplo básico) */
+@media (max-width: 640px) {
+  .header-inner {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
