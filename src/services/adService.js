@@ -7,7 +7,7 @@ export const listAds = async () => {
 
 export const getAd = async (id) => {
   const res = await api.get(`/anuncios/${id}/`);
-  return res.data;
+  return Array.isArray(res.data) ? res.data[0] : res.data;
 };
 
 export const createAd = async (payload) => {
