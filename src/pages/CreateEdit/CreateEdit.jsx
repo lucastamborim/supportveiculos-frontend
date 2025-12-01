@@ -31,7 +31,16 @@ export default function CreateEdit() {
       const loadAd = async () => {
         try {
           const data = await adService.getAd(id);
-          setForm(data);
+          console.log("Dados carregados:", data);
+          setForm({
+            titulo: data.titulo || "",
+            preco: data.preco || "",
+            marca: data.marca || "",
+            modelo: data.modelo || "",
+            ano: data.ano || "",
+            km: data.km || "",
+            telefone_contato: data.telefone_contato || "",
+          });
           
           // Carregar fotos do anúncio
           const photosRes = await photoService.listPhotos(id);
