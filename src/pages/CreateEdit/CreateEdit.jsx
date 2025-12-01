@@ -12,7 +12,6 @@ export default function CreateEdit() {
   const isEdit = !!id;
 
   const [form, setForm] = useState({
-    titulo: "",
     preco: "",
     marca: "",
     modelo: "",
@@ -33,7 +32,6 @@ export default function CreateEdit() {
           const data = await adService.getAd(id);
           console.log("Dados carregados:", data);
           setForm({
-            titulo: data.titulo || "",
             preco: data.preco || "",
             marca: data.marca || "",
             modelo: data.modelo || "",
@@ -124,7 +122,6 @@ export default function CreateEdit() {
 
       <form className="form-fields" onSubmit={handleSubmit}>
         {[
-          "titulo",
           "preco",
           "marca",
           "modelo",

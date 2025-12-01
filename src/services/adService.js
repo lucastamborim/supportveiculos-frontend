@@ -11,8 +11,8 @@ export const getAd = async (id) => {
 };
 
 export const createAd = async (payload) => {
-  if (!payload.titulo || !payload.preco) {
-    throw new Error("Título e preço são obrigatórios");
+  if (!payload.preco) {
+    throw new Error("Preço é obrigatório");
   }
   const res = await api.post("/anuncios/", payload);
   return res.data;
@@ -22,8 +22,8 @@ export const updateAd = async (id, payload) => {
   if (!id) {
     throw new Error("ID do anúncio é obrigatório");
   }
-  if (!payload.titulo || !payload.preco) {
-    throw new Error("Título e preço são obrigatórios");
+  if (!payload.preco) {
+    throw new Error("Preço é obrigatório");
   }
   const res = await api.patch(`/anuncios/${id}/`, payload);
   return res.data;
