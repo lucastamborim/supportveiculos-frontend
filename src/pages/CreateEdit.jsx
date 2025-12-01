@@ -11,7 +11,6 @@ export default function CreateEdit() {
 
   const [form, setForm] = useState({
     titulo: "",
-    descricao: "",
     preco: "",
     marca: "",
     modelo: "",
@@ -70,7 +69,6 @@ export default function CreateEdit() {
       <form className="form-fields" onSubmit={handleSubmit}>
         {[
           "titulo",
-          "descricao",
           "preco",
           "marca",
           "modelo",

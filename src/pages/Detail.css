@@ -1,0 +1,89 @@
+.detail-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.carousel-img {
+  width: 16rem;
+  height: 10rem;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.no-photos {
+  width: 100%;
+  height: 10rem;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  color: #6b7280;
+}
+
+.ad-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin-bottom: 1rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #4b5563;
+}
